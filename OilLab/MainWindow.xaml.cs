@@ -49,6 +49,7 @@ namespace OilLab
         private ProgressBarSetter _oilTransferSetter;
         private ProgressBarSetter _fireSetter;
         private ProgressBarSetter _pipeRepairementSetter;
+        private ProgressBarSetter _yanukovychBarSetter;
 
         public MainWindow()
         {
@@ -59,6 +60,7 @@ namespace OilLab
             _oilTransferSetter = new ProgressBarSetter(UpdateTransferBar);
             _fireSetter = new ProgressBarSetter(UpdateFireBar);
             _pipeRepairementSetter = new ProgressBarSetter(UpdatePipeRepairementBar);
+            _yanukovychBarSetter = new ProgressBarSetter(UpdateYanukovychBar);
 
             System.Threading.Thread timerThread = new System.Threading.Thread(Timer);
             timerThread.IsBackground = true;
@@ -112,7 +114,7 @@ namespace OilLab
         public void UpdateLabels()
         {
             OilAmount.Content = String.Format("Перекачано нефти: {0} баррелей", OilTransferred);
-            StationStatus.Content = String.Format("Состояние станции: {0}\n {1}", StationStatusString, AdditionalPipe);
+            StationStatus.Content = String.Format("Состояние станции: {0},\n {1}", StationStatusString, AdditionalPipe);
         }
 
         public void UpdatePipeRepairementBar()
@@ -140,6 +142,32 @@ namespace OilLab
             }
         }
 
+        public void UpdateYanukovychBar()
+        {
+            if (YanukovychBar.Value == 100)
+            {
+                YanukovychBar.Value = 0;
+                YanukovychCaptureLabel.Content = "";
+                YanukovychStatusLabel.Content = "Злоумышленников нет";
+                Yanukovych = false;
+                TransferStatus = true;
+                StationStatusString = "в норме";
+            }
+            else if (YanukovychBar.Value < 99)
+                YanukovychBar.Value += 1;
+            else if (YanukovychBar.Value >= 99)
+                YanukovychBar.Value = 100;
+        }
+
+        public void YanukovychTime()
+        {
+            if (Yanukovych)
+            {
+                TransferStatus = false;
+                Dispatcher.Invoke(_yanukovychBarSetter);
+            }
+        }
+
         public void Timer()
         {
             while (true)
@@ -149,6 +177,7 @@ namespace OilLab
                     Transfer();
                     Fire();
                     PipeRepairement();
+                    YanukovychTime();
 
                     Dispatcher.Invoke(_labelContentSetter);
                 }
@@ -201,6 +230,9 @@ namespace OilLab
         private void YanukovychButton_Click(object sender, RoutedEventArgs e)
         {
             Yanukovych = true;
+            YanukovychStatusLabel.Content = "IT'S YANUKOVYCH TIME!!!";
+            StationStatusString = "на станции работает злоумышленник";
+            YanukovychCaptureLabel.Content = "Поимка злоумышленника";
         }
     }
 }
