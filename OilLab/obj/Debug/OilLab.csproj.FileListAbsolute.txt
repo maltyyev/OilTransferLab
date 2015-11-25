@@ -1,0 +1,13 @@
+c:\users\amk07\documents\visual studio 2013\Projects\OilLab\OilLab\bin\Debug\OilLab.exe.config
+c:\users\amk07\documents\visual studio 2013\Projects\OilLab\OilLab\bin\Debug\OilLab.exe
+c:\users\amk07\documents\visual studio 2013\Projects\OilLab\OilLab\bin\Debug\OilLab.pdb
+c:\users\amk07\documents\visual studio 2013\Projects\OilLab\OilLab\obj\Debug\OilLab.csprojResolveAssemblyReference.cache
+c:\users\amk07\documents\visual studio 2013\Projects\OilLab\OilLab\obj\Debug\MainWindow.baml
+c:\users\amk07\documents\visual studio 2013\Projects\OilLab\OilLab\obj\Debug\MainWindow.g.cs
+c:\users\amk07\documents\visual studio 2013\Projects\OilLab\OilLab\obj\Debug\App.g.cs
+c:\users\amk07\documents\visual studio 2013\Projects\OilLab\OilLab\obj\Debug\OilLab_MarkupCompile.cache
+c:\users\amk07\documents\visual studio 2013\Projects\OilLab\OilLab\obj\Debug\OilLab.g.resources
+c:\users\amk07\documents\visual studio 2013\Projects\OilLab\OilLab\obj\Debug\OilLab.Properties.Resources.resources
+c:\users\amk07\documents\visual studio 2013\Projects\OilLab\OilLab\obj\Debug\OilLab.csproj.GenerateResource.Cache
+c:\users\amk07\documents\visual studio 2013\Projects\OilLab\OilLab\obj\Debug\OilLab.exe
+c:\users\amk07\documents\visual studio 2013\Projects\OilLab\OilLab\obj\Debug\OilLab.pdb
