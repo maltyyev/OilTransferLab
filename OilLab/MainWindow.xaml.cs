@@ -29,6 +29,8 @@ namespace OilLab
         public static bool TransferStatus = true;
         public static bool AdditionalPipeUsed = false;
         public static bool AssOnFire = false;
+        public static bool PipeDestroyed = false;
+        public static bool Yanukovych = false;
 
         public static int OilTransferred = 0;
         public static int Time = 50;
@@ -46,6 +48,7 @@ namespace OilLab
 
         private ProgressBarSetter _oilTransferSetter;
         private ProgressBarSetter _fireSetter;
+        private ProgressBarSetter _pipeRepairementSetter;
 
         public MainWindow()
         {
@@ -55,9 +58,7 @@ namespace OilLab
 
             _oilTransferSetter = new ProgressBarSetter(UpdateTransferBar);
             _fireSetter = new ProgressBarSetter(UpdateFireBar);
-
-            OilAmount.Content = String.Format("Перекачано нефти: {0} баррелей", OilTransferred);
-            StationStatus.Content = String.Format("Состояние станции: {0}, {1}", StationStatusString, AdditionalPipe);
+            _pipeRepairementSetter = new ProgressBarSetter(UpdatePipeRepairementBar);
 
             System.Threading.Thread timerThread = new System.Threading.Thread(Timer);
             timerThread.IsBackground = true;
@@ -89,6 +90,7 @@ namespace OilLab
             {
                 FireBar.Value = 0;
                 AssOnFire = false;
+                StationStatusString = "в норме";
                 TransferStatus = true;
                 FireStatusLabel.Content = "Возгораний не замечено";
             }
@@ -110,7 +112,32 @@ namespace OilLab
         public void UpdateLabels()
         {
             OilAmount.Content = String.Format("Перекачано нефти: {0} баррелей", OilTransferred);
-            StationStatus.Content = String.Format("Состояние станции: {0}, {1}", StationStatusString, AdditionalPipe);
+            StationStatus.Content = String.Format("Состояние станции: {0}\n {1}", StationStatusString, AdditionalPipe);
+        }
+
+        public void UpdatePipeRepairementBar()
+        {
+            if (PipeRepairementBar.Value == 100)
+            {
+                PipeRepairementBar.Value = 0;
+                PipeDestroyed = false;
+                StationStatusString = "в норме";
+                AdditionalPipe = "запасной трубопровод не задействован";
+                PipeRuptureLabel.Content = "Трубы целы";
+                Time = 50;
+            }
+            else if (PipeRepairementBar.Value < 99)
+                PipeRepairementBar.Value += 1;
+            else if (PipeRepairementBar.Value >= 99)
+                PipeRepairementBar.Value = 100;
+        }
+
+        public void PipeRepairement()
+        {
+            if (PipeDestroyed)
+            {
+                Dispatcher.Invoke(_pipeRepairementSetter);
+            }
         }
 
         public void Timer()
@@ -121,6 +148,7 @@ namespace OilLab
                     System.Threading.Thread.Sleep(Time);
                     Transfer();
                     Fire();
+                    PipeRepairement();
 
                     Dispatcher.Invoke(_labelContentSetter);
                 }
@@ -158,6 +186,21 @@ namespace OilLab
         {
             AssOnFire = true;
             FireStatusLabel.Content = "ПОЖАР!";
+            StationStatusString = "пожар на основном трубопроводе";
+        }
+
+        private void PipeRuptureButton_Click(object sender, RoutedEventArgs e)
+        {
+            PipeDestroyed = true;
+            PipeRuptureLabel.Content = "Устраняются неполадки";
+            StationStatusString = "основной трубопровод вышел из строя";
+            AdditionalPipe = "задействован дополнительный трубопровод";
+            Time = 75;
+        }
+
+        private void YanukovychButton_Click(object sender, RoutedEventArgs e)
+        {
+            Yanukovych = true;
         }
     }
 }

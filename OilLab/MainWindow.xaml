@@ -45,11 +45,11 @@
                VerticalAlignment="Top"/>
         <GroupBox
                   Width="361"
-                  Height="228"
-                  Margin="68,58,0,0"
+                  Height="306"
+                  Margin="10,10,0,0"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
-                  Header="Происшествия"/>
+                  Header="Происшествия" Grid.Column="1"/>
         <Label Name="FireStatusLabel"
                Grid.Column="1"
                Width="197"
@@ -79,24 +79,26 @@
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
                    Content="Трубы целы" Grid.Column="1" />
-        <Button Grid.Column="1"
+        <Button Name="Yanukovych"
+                Grid.Column="1"
                 Width="75"
                 Height="20"
-                Margin="43,266,0,0"
+                Margin="25,234,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Button" />
-        <Label Grid.Column="1"
-               Width="38"
+                Content="Янукович" />
+        <Label Name="YanukovychStatusLabel"
+               Grid.Column="1"
+               Width="248"
                Height="26"
-               Margin="123,263,0,0"
+               Margin="111,231,0,0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
-               Content="Label" />
+               Content="Злоумышленники не были обнаружены" />
         <ProgressBar Grid.Column="1"
-                     Width="100"
+                     Width="334"
                      Height="10"
-                     Margin="43,296,0,0"
+                     Margin="25,290,0,0"
                      HorizontalAlignment="Left"
                      VerticalAlignment="Top" />
         <Button Name="PipeRuptureButton"
@@ -106,7 +108,7 @@
                 Margin="25,146,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Content="Разрыв" />
+                Content="Разрыв" Click="PipeRuptureButton_Click" />
         <Label Grid.Column="1"
                Width="219"
                Height="26"
@@ -114,7 +116,7 @@
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
                Content="Процесс починки трубы" />
-        <ProgressBar Name="PipeRepairProgressBar"
+        <ProgressBar Name="PipeRepairementBar"
                      Grid.Column="1"
                      Width="334"
                      Height="10"
@@ -129,6 +131,13 @@
         <Label Name="StationStatus"
                HorizontalAlignment="Left"
                Margin="10,196,0,0"
-               VerticalAlignment="Top" Width="442"/>
+               VerticalAlignment="Top" Width="442" Height="42"/>
+        <Label Grid.Column="1"
+        	Width="248"
+        	Height="26"
+        	Margin="25,259,0,0"
+        	HorizontalAlignment="Left"
+        	VerticalAlignment="Top"
+        	Content="Поимка преступника" />
     </Grid>
 </Window>
